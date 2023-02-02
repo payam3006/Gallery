@@ -1,12 +1,23 @@
 body {
-  margin: 20px 0px;
+  margin: 0px 0px 30px 0px;
   background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-width: fit-content;
-  overflow-x: hidden;
+  user-select: none;
+}
+
+.header {
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(black, rgb(52, 0, 0), rgb(0, 0, 0, 0));
+  z-index: 1;
 }
 
 h2 {
@@ -14,7 +25,7 @@ h2 {
   font-family: "Courier New", Courier, monospace;
 }
 
-.thumbs {
+.thumbsContainer {
   display: grid;
   gap: 1.5rem;
   /* grid-template-columns: 1fr 1fr 1fr; */
@@ -23,8 +34,8 @@ h2 {
 }
 
 .imgContainer {
-  width: 250px;
-  height: 200px;
+  width: 16vw;
+  height: 12.8vw;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -33,7 +44,7 @@ h2 {
   border-radius: 3%;
 }
 
-.imgthumb {
+.imgThumb {
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -41,30 +52,62 @@ h2 {
   cursor: pointer;
 }
 
-.imgthumb:hover {
+.imgThumb:hover {
   scale: 1.05;
 }
 
+.selected {
+  border: 1px solid antiquewhite;
+  filter: drop-shadow(0px 0px 7px antiquewhite);
+  scale: 1.03;
+}
+
+/* //////////////////////////////////////// */
+/* whith open an image */
+
+.biggerImageBackground {
+  position: fixed;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: blueviolet;
+  opacity: 50%;
+  transition: 1s;
+}
+.thumbsContainer2 {
+  filter: blur(10px);
+  transition: 1s;
+}
+.body2 {
+  overflow-y: hidden;
+}
+
+.bigImg {
+  z-index: 2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-45%);
+  max-width: 75%;
+  max-height: 75%;
+  border: solid 5px silver;
+  transition: 2s;
+}
+
+/* //////////////////////////////////////// */
+
 @media only screen and (max-width: 1400px) {
-  .thumbs {
+  .thumbsContainer {
     grid-template-columns: repeat(4, 1fr);
   }
-}
-
-@media only screen and (max-width: 1200px) {
-  .thumbs {
-    grid-template-columns: repeat(3, 1fr);
+  .imgContainer {
+    width: 20vw;
+    height: 16vw;
   }
 }
 
-@media only screen and (max-width: 900px) {
-  .thumbs {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media only screen and (max-width: 615px) {
-  .thumbs {
+@media only screen and (max-width: 700px) {
+  .thumbsContainer {
     grid-template-columns: repeat(3, 1fr);
   }
   .imgContainer {
@@ -74,7 +117,7 @@ h2 {
 }
 
 @media only screen and (max-width: 490px) {
-  .thumbs {
+  .thumbsContainer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
