@@ -82,20 +82,133 @@ h2 {
   overflow-y: hidden;
 }
 
-.bigImg {
+.biggerImgFrame {
   z-index: 2;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-45%);
+
+  /* when open */
+  /* visibility: visible; */
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.biggerImgFrameClosing {
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
+}
+
+.bigImg {
   max-width: 75vw;
   max-height: 75vh;
   border: solid 5px silver;
+  /* how to animate openning image??? */
+
+  /* in resize */
   transition: 0.5s;
   image-rendering: crisp-edges;
 }
 
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 /* //////////////////////////////////////// */
+/* in opened image */
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 10px;
+  opacity: 50%;
+  background-color: darkslateblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+  color: aliceblue;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  opacity: 100%;
+}
+
+.rightButton {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 4vw;
+  height: 8vw;
+  border-radius: 100% 0 0 100% / 50%;
+  opacity: 50%;
+  background-color: darkslateblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+
+  color: aliceblue;
+  cursor: pointer;
+}
+.rightButton:hover {
+  opacity: 100%;
+}
+.leftButton {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  width: 4vw;
+  height: 8vw;
+  border-radius: 0 100% 100% 0/ 50%;
+  opacity: 50%;
+  background-color: darkslateblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  color: aliceblue;
+  cursor: pointer;
+}
+.leftButton:hover {
+  opacity: 100%;
+}
 
 @media only screen and (max-width: 1400px) {
   .thumbsContainer {
@@ -114,6 +227,17 @@ h2 {
   .imgContainer {
     width: 25vw;
     height: 20vw;
+  }
+  .closeButton {
+    width: 4vw;
+    height: 4vw;
+    font-size: 3vw;
+  }
+  .leftButton {
+    font-size: large;
+  }
+  .rightButton {
+    font-size: large;
   }
 }
 

@@ -25,15 +25,49 @@ const openImage = (i) => {
   document
     .getElementById("biggerImageBackground")
     .setAttribute("style", "display:block");
-  document
-    .getElementById("biggerImageBackground")
-    .classList.add("biggerImageBackground");
+
   document.getElementById("bigImg").setAttribute("src", `img/images/${i}.jpg`);
-  document.getElementById("bigImg").setAttribute("style", "display:block");
+  document
+    .getElementById("biggerImgFrame")
+    .setAttribute("style", "display:block");
   document.getElementById("thumbsContainer").classList.add("thumbsContainer2");
   document.getElementById("body").classList.add("body2");
-  document.getElementById("bigImg").classList.add("bigImg");
+  openedImg = i;
 };
+
+const closeImage = () => {
+  document
+    .getElementById("biggerImageBackground")
+    .setAttribute("style", "display:none");
+  document
+    .getElementById("biggerImgFrame")
+    .classList.add("biggerImgFrameClosing");
+  setTimeout(function close() {
+    document
+      .getElementById("biggerImgFrame")
+      .setAttribute("style", "display:none");
+  }, 1000);
+  setTimeout(function close2() {
+    document
+      .getElementById("biggerImgFrame")
+      .classList.remove("biggerImgFrameClosing");
+  }, 1000);
+  document
+    .getElementById("thumbsContainer")
+    .classList.remove("thumbsContainer2");
+  document.getElementById("body").classList.remove("body2");
+  openedImg = 0;
+};
+
+/////////////////close BigImg///////////////////////
+const box = document.getElementById("biggerImgFrame");
+document.addEventListener("click", function clickOutsideImg(event) {
+  if (openedImg !== 0) {
+    if (!box.contains(event.target)) {
+      closeImage();
+    }
+  }
+});
 
 const fillWithBigThumbs = () => {
   removeThumbs();
