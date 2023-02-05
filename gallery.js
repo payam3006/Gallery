@@ -33,6 +33,7 @@ const openImage = (i) => {
   document.getElementById("thumbsContainer").classList.add("thumbsContainer2");
   document.getElementById("body").classList.add("body2");
   openedImg = i;
+  checkButtonsAvailability();
 };
 
 const closeImage = () => {
@@ -68,6 +69,46 @@ document.addEventListener("click", function clickOutsideImg(event) {
     }
   }
 });
+
+/////////////////Next Image Func.////////////////////
+const goNext = () => {
+  if (openedImg !== 40) {
+    openImage(openedImg + 1);
+  }
+};
+
+/////////////////Previous Image Func.////////////////////
+const goPrevious = () => {
+  if (openedImg !== 1) {
+    openImage(openedImg - 1);
+  }
+};
+
+///////////////check Buttons Availability///////////
+const checkButtonsAvailability = () => {
+  if (openedImg == 1) {
+    document.getElementById("leftButton").setAttribute("style", "display:none");
+    document
+      .getElementById("rightButton")
+      .setAttribute("style", "display:block flex");
+  } else {
+    if (openedImg == 40) {
+      document
+        .getElementById("rightButton")
+        .setAttribute("style", "display:none");
+      document
+        .getElementById("leftButton")
+        .setAttribute("style", "display:block flex");
+    } else {
+      document
+        .getElementById("leftButton")
+        .setAttribute("style", "display:block flex");
+      document
+        .getElementById("rightButton")
+        .setAttribute("style", "display:block flex");
+    }
+  }
+};
 
 const fillWithBigThumbs = () => {
   removeThumbs();
