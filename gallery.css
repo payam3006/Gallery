@@ -173,6 +173,7 @@ h2 {
 .rightButton {
   position: absolute;
   top: 50%;
+  translate: 0 -50%;
   right: 10px;
   width: 4vw;
   height: 8vw;
@@ -193,6 +194,8 @@ h2 {
 .leftButton {
   position: absolute;
   top: 50%;
+  translate: 0 -50%;
+
   left: 10px;
   width: 4vw;
   height: 8vw;
