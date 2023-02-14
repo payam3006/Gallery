@@ -18,6 +18,11 @@ const selectThumb = (i) => {
     }
     document.getElementById(`imgContainer${i}`).classList.add("selected");
     selectedImg = i;
+  } else {
+    document
+      .getElementById(`imgContainer${selectedImg}`)
+      .classList.remove("selected");
+    selectedImg = 0;
   }
 };
 
@@ -196,7 +201,7 @@ const keyboardAction = (event) => {
 document.body.addEventListener("keydown", keyboardAction);
 
 ////////////////////mouse acts////////////////////////////////
-const mouseAction = (A) => {
+const mouseActionOnOpenedImg = (A) => {
   let scroll = A.deltaY;
   if (scroll == -100 && openedImg !== 0) {
     goNext();
@@ -206,5 +211,19 @@ const mouseAction = (A) => {
   }
 };
 
+const mouseActionOfSelecting = (A) => {
+  let scroll = A.deltaY;
+  if (selectedImg !== 0 && openedImg == 0) {
+    if (scroll == -100 && selectedImg !== 40) {
+      selectThumb(selectedImg + 1);
+    }
+    if (scroll == 100 && selectedImg !== 1) {
+      selectThumb(selectedImg - 1);
+    }
+  }
+};
+
+const gridContainer = document.getElementById("thumbsContainer");
 const frame = document.getElementById("biggerImgFrame");
-frame.addEventListener("wheel", mouseAction);
+frame.addEventListener("wheel", mouseActionOnOpenedImg);
+gridContainer.addEventListener("wheel", mouseActionOfSelecting);
