@@ -45,7 +45,9 @@ const selectThumb = (i) => {
       document.getElementById(`imgContainer${i}`).getBoundingClientRect().y < 0
     ) {
       document.getElementById(`imgContainer${i}`).scrollIntoView(true);
-      window.scrollBy(0, -100);
+      setTimeout(function () {
+        window.scrollBy(0, -100);
+      }, 100);
       // window.scrollTo(0, 600);
     }
     ////////////////////Scroll to selected thumb by set bottom of div (false)/////////////////
@@ -56,7 +58,9 @@ const selectThumb = (i) => {
           .height
     ) {
       document.getElementById(`imgContainer${i}`).scrollIntoView(false);
-      window.scrollBy(0, 100);
+      setTimeout(function () {
+        window.scrollBy(0, 100);
+      }, 100);
     }
     // document.getElementById(`imgContainer${i}`).scrollIntoView(false);
     //////////////////////////////////////////////////////////////////////////////////////
@@ -257,10 +261,10 @@ const mouseActionOnOpenedImg = (A) => {
 const mouseActionOfSelecting = (A) => {
   let scroll = A.deltaY;
   if (selectedImg !== 0 && openedImg == 0) {
-    if (scroll == -100 && selectedImg !== 40) {
+    if (scroll <= -100 && selectedImg !== 40) {
       selectThumb(selectedImg + 1);
     }
-    if (scroll == 100 && selectedImg !== 1) {
+    if (scroll >= 100 && selectedImg !== 1) {
       selectThumb(selectedImg - 1);
     }
   }
