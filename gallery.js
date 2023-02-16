@@ -17,6 +17,49 @@ const selectThumb = (i) => {
         .classList.remove("selected");
     }
     document.getElementById(`imgContainer${i}`).classList.add("selected");
+    ///////////////////////////////
+    console.log(
+      document.getElementById(`imgContainer${i}`).getBoundingClientRect()
+    );
+
+    ///////////////Absolute body and document height/////////////////
+    // console.log(document.body.offsetHeight);
+    // console.log(document.body.scrollHeight);
+    // console.log(document.documentElement.clientHeight);
+    // console.log(document.documentElement.offsetHeight);
+    // console.log(document.documentElement.scrollHeight);
+    // console.log(
+    //   document.getElementById(`imgContainer${i}`).offsetTop +
+    //     document.getElementById(`imgContainer${i}`).offsetHeight
+    // );
+    ////////////////////ViewPort height/////////////////////////////
+    // console.log(window.innerHeight);
+    // console.log(
+    //   document.getElementById(`imgContainer${i}`).getBoundingClientRect().y +
+    //     document.getElementById(`imgContainer${i}`).getBoundingClientRect()
+    //       .height
+    // );
+
+    //////////////////////////////
+    if (
+      document.getElementById(`imgContainer${i}`).getBoundingClientRect().y < 0
+    ) {
+      document.getElementById(`imgContainer${i}`).scrollIntoView(true);
+      window.scrollBy(0, -100);
+      // window.scrollTo(0, 600);
+    }
+    ////////////////////Scroll to selected thumb by set bottom of div (false)/////////////////
+    if (
+      window.innerHeight <
+      document.getElementById(`imgContainer${i}`).getBoundingClientRect().y +
+        document.getElementById(`imgContainer${i}`).getBoundingClientRect()
+          .height
+    ) {
+      document.getElementById(`imgContainer${i}`).scrollIntoView(false);
+      window.scrollBy(0, 100);
+    }
+    // document.getElementById(`imgContainer${i}`).scrollIntoView(false);
+    //////////////////////////////////////////////////////////////////////////////////////
     selectedImg = i;
   } else {
     document
@@ -226,4 +269,22 @@ const mouseActionOfSelecting = (A) => {
 const gridContainer = document.getElementById("thumbsContainer");
 const frame = document.getElementById("biggerImgFrame");
 frame.addEventListener("wheel", mouseActionOnOpenedImg);
+
+//////////////////prevent default scrolling action on grid container////////////////
+gridContainer.addEventListener("wheel", preventScroll, { passive: false });
+
+function preventScroll(e) {
+  if (selectedImg !== 0) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    return false;
+  }
+}
+///////////////////////////////////////////////////////////////////////////////////
 gridContainer.addEventListener("wheel", mouseActionOfSelecting);
+
+// const scrollToo = () => {
+//   console.log("sdncvkjsdcvo");
+//   document.getElementById("imgContainer4").scrollIntoView(false);
+// };
