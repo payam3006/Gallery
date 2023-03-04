@@ -1,3 +1,4 @@
+let imgNum = 40;
 let openedImg = 0;
 let selectedImg = 0;
 
@@ -47,7 +48,7 @@ const selectThumb = (i) => {
       document.getElementById(`imgContainer${i}`).scrollIntoView(true);
       setTimeout(function () {
         window.scrollBy(0, -100);
-      }, 100);
+      }, 200);
       // window.scrollTo(0, 600);
     }
     ////////////////////Scroll to selected thumb by set bottom of div (false)/////////////////
@@ -60,7 +61,7 @@ const selectThumb = (i) => {
       document.getElementById(`imgContainer${i}`).scrollIntoView(false);
       setTimeout(function () {
         window.scrollBy(0, 100);
-      }, 100);
+      }, 200);
     }
     // document.getElementById(`imgContainer${i}`).scrollIntoView(false);
     //////////////////////////////////////////////////////////////////////////////////////
@@ -132,7 +133,7 @@ document.addEventListener("click", function clickOutsideImg(event) {
 
 /////////////////Next Image Func.////////////////////
 const goNext = () => {
-  if (openedImg !== 40) {
+  if (openedImg !== imgNum) {
     openImage(openedImg + 1);
   }
 };
@@ -152,7 +153,7 @@ const checkButtonsAvailability = () => {
       .getElementById("rightButton")
       .setAttribute("style", "display:block flex");
   } else {
-    if (openedImg == 40) {
+    if (openedImg == imgNum) {
       document
         .getElementById("rightButton")
         .setAttribute("style", "display:none");
@@ -172,7 +173,7 @@ const checkButtonsAvailability = () => {
 
 const fillWithBigThumbs = () => {
   removeThumbs();
-  for (let i = 1; i <= 40; i++) {
+  for (let i = 1; i <= imgNum; i++) {
     let imageContainer = document.createElement("div");
     imageContainer.className = "imgContainer";
     imageContainer.id = `imgContainer${i}`;
@@ -190,7 +191,7 @@ const fillWithBigThumbs = () => {
 
 const fillWithSmallThumbs = () => {
   removeThumbs();
-  for (let i = 1; i <= 40; i++) {
+  for (let i = 1; i <= imgNum; i++) {
     let imageContainer = document.createElement("div");
     imageContainer.className = "imgContainer";
     imageContainer.id = `imgContainer${i}`;
@@ -250,10 +251,10 @@ document.body.addEventListener("keydown", keyboardAction);
 ////////////////////mouse acts////////////////////////////////
 const mouseActionOnOpenedImg = (A) => {
   let scroll = A.deltaY;
-  if (scroll == -100 && openedImg !== 0) {
+  if (scroll < 0 && openedImg !== 0) {
     goNext();
   }
-  if (scroll == 100 && openedImg !== 0) {
+  if (scroll > 0 && openedImg !== 0) {
     goPrevious();
   }
 };
@@ -261,10 +262,10 @@ const mouseActionOnOpenedImg = (A) => {
 const mouseActionOfSelecting = (A) => {
   let scroll = A.deltaY;
   if (selectedImg !== 0 && openedImg == 0) {
-    if (scroll <= -100 && selectedImg !== 40) {
+    if (scroll < 0 && selectedImg !== imgNum) {
       selectThumb(selectedImg + 1);
     }
-    if (scroll >= 100 && selectedImg !== 1) {
+    if (scroll > 0 && selectedImg !== 1) {
       selectThumb(selectedImg - 1);
     }
   }
@@ -292,3 +293,22 @@ gridContainer.addEventListener("wheel", mouseActionOfSelecting);
 //   console.log("sdncvkjsdcvo");
 //   document.getElementById("imgContainer4").scrollIntoView(false);
 // };
+
+//////////////////////Touch Event/////////////////////////
+const touchFunc = (a) => {
+  console.log(a.touches[0]);
+};
+frame.addEventListener("touchmove", touchFunc);
+
+// window.addEventListener("scroll", function (e) {
+//   console.log("scroll", e);
+// });
+// window.addEventListener("touchstart", function (e) {
+//   console.log("touchstart", e);
+// });
+// window.addEventListener("touchmove", function (e) {
+//   console.log("touchmove", e.touches[0]);
+// });
+// window.addEventListener("touchend", function (e) {
+//   console.log("touchend", e);
+// });
